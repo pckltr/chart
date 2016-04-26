@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chart</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h4>Input table</h4>
+        <textarea id="table-input" class="input" placeholder="Paste table" value=""></textarea>
+        <h4>Heading</h4>
+        <input type="checkbox" id="heading-input" checked>
+        <label for="heading">Yes</label>
+        <h4>Delimiter type</h4>
+        <ul class="delimiter-list">
+            <li>
+                <input type="radio" name="delimiter" id="tab-input" value="tab">
+                <label for="tab">Tab</label>
+            </li>
+            <li>
+                <input type="radio" name="delimiter" id="comma-input" value="comma">
+                <label for="comma">Comma</label>
+            </li>
+            <li>
+                <input type="radio" name="delimiter" id="other-input" value="other">
+                <label for="other">Other</label>
+                <input type="text" id="other-delimiter">
+            </li>
+        </ul>
+        <canvas id="canvas" class="canvas" width="640" height="480"></canvas>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
