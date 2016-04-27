@@ -71,8 +71,9 @@ function plotChart() {
         nameX = arr[0].split(delimiter)[0];
         nameY = arr[0].split(delimiter)[1];
         context.font = '20px Arial';
-        context.fillText(nameX, 10, 50);
-        context.fillText(nameY, (canvas.width - context.measureText(nameY).width) / 2, canvas.height);
+        context.fillStyle = '#355065';
+        context.fillText(nameX, 10, canvas.height / 2 - 10);
+        context.fillText(nameY, (canvas.width - context.measureText(nameY).width) / 2, canvas.height - 10);
         arr.splice(0,1);
     }
 
@@ -93,12 +94,27 @@ function plotChart() {
     context.beginPath();
     for (var i = 0; i < y.length; i += 1) {
         var stepX = canvas.width / x.length;
-        percentY[i] = y[i] * (canvas.height - 20) / largestNumber;
+        percentY[i] = y[i] * (canvas.height) / largestNumber;
         context.moveTo(startX, startY);
         startX = startX + stepX;
         startY = canvas.height - percentY[i];
         context.lineTo(startX, startY);
     }
     context.closePath();
+    context.lineWidth = '4';
+    context.lineCap = 'round';
+    context.strokeStyle = '#42CFE3';
     context.stroke();
 }
+
+(function() {
+    window.addEventListener('resize', canvasResize);
+    window.addEventListener('load', canvasResize);
+debugger;
+    function canvasResize() {
+        var left = document.getElementById('left');
+        console.log(left.height);
+        canvas.height = left.height;
+    }
+
+});
