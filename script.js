@@ -8,6 +8,20 @@ var canvas = document.getElementById('canvas'),
     tableInput = document.getElementById('table-input');
 
 
+(function() {
+    // has to be before canvas starts drawing or else
+    window.addEventListener('resize', canvasResize);
+    window.addEventListener('load', canvasResize);
+    function canvasResize() {
+        var left = document.getElementById('left');
+        var chartTitle = document.getElementById('chart-title');
+        canvas.height = left.clientHeight - chartTitle.clientHeight - parseInt(window.getComputedStyle(chartTitle, null).getPropertyValue("margin-top")) - parseInt(window.getComputedStyle(chartTitle, null).getPropertyValue("margin-bottom"));
+        canvas.width = window.innerWidth - left.clientWidth;
+        plotChart();
+    }
+
+})();
+
 tableInput.addEventListener('input', function() {
     plotChart();
 });
@@ -36,7 +50,11 @@ otherDelimiter.addEventListener('input', function() {
     otherInput.checked = 'true';
     plotChart();
 });
+otherDelimiter.addEventListener('focus', function() {
+    otherInput.checked = 'true';
+});
 window.addEventListener('load', function() {
+
     commaInput.checked = 'true';
     tableInput.value = 'prod,size\na,100\nb,300\nc,300\nd,400';
     plotChart();
@@ -70,11 +88,11 @@ function plotChart() {
     if (headingInput.checked) {
         nameX = arr[0].split(delimiter)[0];
         nameY = arr[0].split(delimiter)[1];
-        context.font = '20px Arial';
-        context.fillStyle = '#355065';
+        context.font = '14px Roboto';
+        context.fillStyle = '#226E9B';
         context.fillText(nameX, 10, canvas.height / 2 - 10);
         context.fillText(nameY, (canvas.width - context.measureText(nameY).width) / 2, canvas.height - 10);
-        arr.splice(0,1);
+        arr.splice(0, 1);
     }
 
 
@@ -103,18 +121,6 @@ function plotChart() {
     context.closePath();
     context.lineWidth = '4';
     context.lineCap = 'round';
-    context.strokeStyle = '#42CFE3';
+    context.strokeStyle = '#FF9A39';
     context.stroke();
 }
-
-(function() {
-    window.addEventListener('resize', canvasResize);
-    window.addEventListener('load', canvasResize);
-debugger;
-    function canvasResize() {
-        var left = document.getElementById('left');
-        console.log(left.height);
-        canvas.height = left.height;
-    }
-
-});
